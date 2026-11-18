@@ -25,8 +25,8 @@ function edit(order){
   editing=order?.id;
   formTitle.textContent=editing?'Заказ '+editing:'Новый заказ';
   orderForm.reset();
-  for(const field of ['client','size','kind','notes']){
-    if(order) orderForm.elements[field].value=order[field];
+  for(const field of ['client','size','kind','notes','leftExam','rightExam','correction']){
+    if(order) orderForm.elements[field].value=order[field] ?? '';
   }
   clients.replaceChildren(...[...new Set(orders.map(o=>o.client))].map(n=>elem('option',n)));
   editor.showModal();
@@ -86,3 +86,4 @@ function render(){
 search.oninput=render;
 window.onhashchange=()=>{search.value='';notice.textContent='';render();};
 render();
+
